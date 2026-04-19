@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cicada GRC Advisory — Expert Cybersecurity & Civil Defense</title>
+<meta name="description" content="High-tier Governance, Risk & Compliance advisory. Automated compliance for global enterprises and public cyber interest services for citizens.">
+<meta property="og:title" content="Cicada GRC Advisory">
+<meta property="og:description" content="Architected for trust. From enterprise GRC to civil defense — specialized advisory where technical depth meets societal resilience.">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:       #0f2345;
+    --navy-mid:   #1a3560;
+    --navy-light: #2a4a7f;
+    --gold:       #c9a84c;
+    --gold-light: #e2c06a;
+    --cream:      #f8f5ef;
+    --cream-dark: #ede8df;
+    --ink:        #0f1923;
+    --mist:       #c5cdd8;
+    --nav-h:      72px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9000;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    height: var(--nav-h);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3rem;
+    background: rgba(248,245,239,0.93);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(197,205,216,0.5);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 24px rgba(15,35,69,0.1); }
+
+  /* ── LOGO — bigger, bolder, commanding ── */
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--navy);
+    text-decoration: none;
+    line-height: 1;
+    display: flex;
+    align-items: baseline;
+  }
+  .logo-grc { color: var(--gold); font-weight: 700; }
+  .logo-advisory { font-style: italic; font-weight: 600; color: var(--navy-light); font-size: 1.1rem; margin-left: 0.22rem; }
+
+  .nav-right { display: flex; align-items: center; gap: 1rem; }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.55;
+    transition: opacity 0.2s, color 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--navy); }
+
+  .nav-cta {
+    background: var(--navy) !important;
+    color: var(--cream) !important;
+    opacity: 1 !important;
+    padding: 0.5rem 1.3rem;
+    border-radius: 2px;
+    font-size: 0.67rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--navy-light) !important; transform: translateY(-1px); }
+
+  /* ── CICADA 3301 ORB ── */
+  .cicada-orb {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--navy);
+    border: 1.5px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+    flex-shrink: 0;
+    padding: 0;
+  }
+  .cicada-orb:hover { transform: scale(1.1) rotate(18deg); box-shadow: 0 0 20px rgba(201,168,76,0.4); }
+  .cicada-orb svg { width: 20px; height: 20px; display: block; }
+
+  /* Modal */
+  .cicada-modal-bg {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15,35,69,0.72);
+    z-index: 5000;
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .cicada-modal-bg.open { display: flex; animation: bgIn 0.3s ease both; }
+  @keyframes bgIn { from { opacity:0; } to { opacity:1; } }
+
+  .cicada-modal {
+    background: var(--navy);
+    color: var(--cream);
+    max-width: 640px;
+    width: 100%;
+    border: 1px solid rgba(201,168,76,0.28);
+    max-height: 88vh;
+    overflow-y: auto;
+    animation: modalUp 0.35s cubic-bezier(0.34,1.2,0.64,1) both;
+  }
+  @keyframes modalUp { from { transform: translateY(22px); opacity:0; } to { transform: translateY(0); opacity:1; } }
+
+  .modal-header {
+    padding: 2.5rem 2.5rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .modal-eyebrow {
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .modal-eyebrow::before { content:''; width:1.2rem; height:1px; background:var(--gold); flex-shrink:0; }
+  .modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.85rem;
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--cream);
+  }
+  .modal-close {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--cream);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s;
+    line-height: 1;
+    font-family: 'DM Mono', monospace;
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.13); }
+
+  .modal-body { padding: 2rem 2.5rem 2.5rem; }
+  .modal-body p { font-size: 0.79rem; opacity: 0.7; line-height: 1.95; margin-bottom: 1.2rem; }
+  .modal-body strong { color: var(--gold-light); font-weight: 400; }
+
+  .modal-quote {
+    background: rgba(255,255,255,0.04);
+    border-left: 2px solid var(--gold);
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.08rem;
+    font-style: italic;
+    color: rgba(248,245,239,0.82);
+    line-height: 1.6;
+  }
+  .modal-quote cite { display: block; margin-top: 0.6rem; font-family: 'DM Mono', monospace; font-style: normal; font-size: 0.62rem; opacity: 0.45; }
+
+  .modal-divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 1.5rem 0; }
+
+  .modal-wiki {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--gold-light);
+    text-decoration: none;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+    padding-bottom: 2px;
+    opacity: 0.8;
+    transition: opacity 0.2s, border-color 0.2s;
+    margin-top: 0.5rem;
+  }
+  .modal-wiki:hover { opacity: 1; border-color: var(--gold-light); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: var(--nav-h);
+  }
+
+  .hero-left {
+    padding: 7rem 3.5rem 6rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: fadeUp 1s ease both;
+  }
+
+  .eyebrow {
+    font-size: 0.63rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .eyebrow::before { content:''; width:2rem; height:1px; background:var(--gold); flex-shrink:0; }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 4.5vw, 5rem);
+    font-weight: 700;
+    line-height: 1.08;
+    margin-bottom: 2rem;
+    color: var(--navy);
+  }
+  h1 em { font-style: italic; color: var(--navy-light); font-weight: 600; }
+
+  .hero-sub { font-size: 0.78rem; color: var(--ink); opacity: 0.52; max-width: 400px; margin-bottom: 3rem; line-height: 1.9; }
+
+  .hero-actions { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 0.9rem 2rem;
+    text-decoration: none;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    transition: background 0.2s, transform 0.15s;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Mono', monospace;
+  }
+  .btn-primary:hover { background: var(--navy-light); transform: translateY(-2px); }
+
+  .btn-ghost { color: var(--navy-light); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.08em; opacity: 0.8; transition: opacity 0.2s; display: flex; align-items: center; gap: 5px; }
+  .btn-ghost:hover { opacity: 1; }
+
+  .hero-right {
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.025) 39px, rgba(255,255,255,0.025) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.025) 39px, rgba(255,255,255,0.025) 40px);
+  }
+  .hero-right::after {
+    content: '';
+    position: absolute;
+    top: -8%;
+    right: -5%;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.1);
+    pointer-events: none;
+  }
+  .hero-right-content { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 3rem; }
+  .hero-stat-row { display: flex; gap: 1.5rem; margin-bottom: 2.5rem; }
+  .hero-stat { background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.18); padding: 1.2rem 1.5rem; flex: 1; }
+  .hero-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: var(--gold-light); line-height: 1; margin-bottom: 4px; font-weight: 600; }
+  .hero-stat-label { font-size: 0.57rem; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255,255,255,0.38); }
+  .hero-network { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 1.5rem; }
+  .hero-network-label { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.18em; color: rgba(255,255,255,0.28); margin-bottom: 10px; }
+  .badge-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .badge { font-size: 0.62rem; border: 1px solid rgba(201,168,76,0.22); color: rgba(255,255,255,0.62); padding: 4px 10px; letter-spacing: 0.06em; }
+
+  /* Trust bar */
+  .trust-bar {
+    background: var(--navy-mid);
+    color: var(--cream);
+    padding: 1.2rem 4rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .trust-bar::-webkit-scrollbar { display: none; }
+  .trust-label { font-size: 0.56rem; text-transform: uppercase; letter-spacing: 0.18em; opacity: 0.28; white-space: nowrap; flex-shrink: 0; }
+  .trust-divider { width: 1px; height: 18px; background: rgba(255,255,255,0.09); flex-shrink: 0; }
+  .trust-item { font-size: 0.62rem; opacity: 0.48; white-space: nowrap; letter-spacing: 0.08em; }
+
+  /* Sections */
+  .section { padding: 7rem 4rem; border-bottom: 1px solid var(--mist); }
+  .section-header { margin-bottom: 4rem; }
+  .dark-section { background: var(--navy); color: var(--cream); border-bottom: none; }
+  .dark-section .eyebrow { color: rgba(201,168,76,0.75); }
+  .dark-section h2 { color: var(--cream); }
+
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 700; line-height: 1.1; margin-top: 1rem; color: var(--navy); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+  .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.05); margin-top: 3rem; }
+  .service-card { background: var(--navy); padding: 2.8rem; border: 1px solid rgba(255,255,255,0.05); transition: border-color 0.25s, background 0.25s; position: relative; }
+  .service-card::before { content:''; position:absolute; top:0; left:0; width:2px; height:0; background:var(--gold); transition:height 0.35s ease; }
+  .service-card:hover::before { height: 100%; }
+  .service-card:hover { background: rgba(255,255,255,0.03); border-color: rgba(201,168,76,0.18); }
+  .service-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--cream); margin-bottom: 12px; }
+  .service-card p { font-size: 0.75rem; opacity: 0.5; line-height: 1.8; margin-bottom: 1.2rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 0.56rem; border: 1px solid rgba(201,168,76,0.28); color: var(--gold-light); padding: 3px 8px; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  .civil-section { background: var(--cream-dark); }
+  .civil-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .civil-card { background: var(--cream); padding: 2.5rem; border: 1px solid var(--mist); transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s; }
+  .civil-card:hover { border-color: var(--navy-light); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(15,35,69,0.09); }
+  .civil-card-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--mist); line-height: 1; margin-bottom: 1rem; }
+  .civil-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; margin-bottom: 10px; color: var(--navy); }
+  .civil-card p { font-size: 0.73rem; opacity: 0.58; line-height: 1.8; }
+
+  .contact-left { padding-right: 4rem; }
+  .contact-left p { margin-top: 1rem; font-size: 0.75rem; opacity: 0.55; line-height: 1.9; max-width: 360px; }
+  .contact-detail { margin-top: 2rem; display: flex; flex-direction: column; gap: 6px; }
+  .contact-detail a { color: var(--navy-light); text-decoration: none; font-size: 0.72rem; opacity: 0.8; transition: opacity 0.2s; }
+  .contact-detail a:hover { opacity: 1; }
+
+  .contact-form { display: flex; flex-direction: column; gap: 12px; }
+  .contact-form input, .contact-form select, .contact-form textarea {
+    padding: 14px 16px;
+    background: var(--cream-dark);
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.73rem;
+    color: var(--ink);
+    transition: border-color 0.2s;
+    outline: none;
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { border-color: var(--navy-light); }
+  .contact-form textarea { resize: vertical; min-height: 120px; }
+
+  footer { background: var(--navy); color: var(--cream); padding: 4rem; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3rem; border-top: 1px solid rgba(255,255,255,0.05); }
+  .footer-brand .brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--gold-light); margin-bottom: 10px; font-weight: 700; }
+  .footer-brand p { font-size: 0.7rem; opacity: 0.35; line-height: 1.8; max-width: 220px; }
+  .footer-col h5 { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.18em; opacity: 0.28; margin-bottom: 1rem; }
+  .footer-col a { display: block; text-decoration: none; color: var(--cream); font-size: 0.72rem; opacity: 0.46; margin-bottom: 8px; transition: opacity 0.2s; }
+  .footer-col a:hover { opacity: 1; }
+  .footer-bottom { background: var(--navy); padding: 1.2rem 4rem; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 0.6rem; color: var(--cream); opacity: 0.22; }
+
+  [id] { scroll-margin-top: calc(var(--nav-h) + 1.5rem); }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+  .fade-up { opacity:0; transform:translateY(20px); transition:opacity 0.65s ease, transform 0.65s ease; }
+  .fade-up.visible { opacity:1; transform:translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 1.2rem; }
+    .nav-links li:not(:last-child) { display: none; }
+    .nav-logo { font-size: 1.15rem; }
+    .logo-advisory { font-size: 0.9rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 280px; }
+    .hero-left { padding: 4.5rem 1.5rem 3rem; }
+    .section { padding: 4rem 1.5rem; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .service-grid { grid-template-columns: 1fr; }
+    .civil-grid { grid-template-columns: 1fr; }
+    .contact-left { padding-right: 0; margin-bottom: 2rem; }
+    footer { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem; }
+    .footer-bottom { padding: 1rem 1.5rem; }
+    .trust-bar { padding: 1rem 1.5rem; }
+    .hero-stat-row { flex-direction: column; gap: 1rem; }
+    .cicada-orb { width: 36px; height: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="top-nav">
+  <a href="#" class="nav-logo">Cicada<span class="logo-grc">&nbsp;GRC</span><span class="logo-advisory">&nbsp;Advisory</span></a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#enterprise">Enterprise</a></li>
+      <li><a href="#civil">Civil Defense</a></li>
+      <li><a href="#contact" class="nav-cta">Book Consultation</a></li>
+    </ul>
+    <button class="cicada-orb" onclick="openModal()" title="The philosophy behind the name" aria-label="Learn about Cicada 3301">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="9" stroke="#c9a84c" stroke-width="1.2"/>
+        <circle cx="12" cy="12" r="3.5" stroke="#c9a84c" stroke-width="1"/>
+        <line x1="12" y1="3" x2="12" y2="8.5" stroke="#c9a84c" stroke-width="1"/>
+        <line x1="12" y1="15.5" x2="12" y2="21" stroke="#c9a84c" stroke-width="1"/>
+        <line x1="3" y1="12" x2="8.5" y2="12" stroke="#c9a84c" stroke-width="1"/>
+        <line x1="15.5" y1="12" x2="21" y2="12" stroke="#c9a84c" stroke-width="1"/>
+        <circle cx="12" cy="12" r="1.4" fill="#c9a84c"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- CICADA 3301 MODAL -->
+<div class="cicada-modal-bg" id="cicada-bg" onclick="bgClose(event)">
+  <div class="cicada-modal" role="dialog" aria-modal="true">
+    <div class="modal-header">
+      <div>
+        <div class="modal-eyebrow">The Philosophy Behind the Name</div>
+        <h2 class="modal-title">Cicada 3301 —<br>The Internet's Greatest Mystery</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <p>
+        In January 2012, a cryptic image appeared on 4chan. It contained a hidden message. Solving it led to another puzzle. Then another. The trail spanned <strong>number theory, steganography, ancient Mayan numerology, runic ciphers, and physical posters appearing simultaneously in Warsaw, Paris, Seoul, and Dallas</strong> — all signed only "3301".
+      </p>
+      <p>
+        The puzzles were extraordinarily sophisticated — recruiting only the most determined minds through layers of encryption, Tor hidden services, and GPS coordinates to real-world dead drops. Three consecutive years of puzzles. Then silence. <strong>No organisation ever claimed authorship.</strong>
+      </p>
+      <div class="modal-quote">
+        "The best minds are not in government. If you think you have the skills to help us, come find us."
+        <cite>— Cicada 3301, 2012</cite>
+      </div>
+      <hr class="modal-divider">
+      <p>
+        The name <strong>Cicada</strong> was chosen for this firm because it embodies a philosophy that shapes everything here. A cicada lives underground for 13 or 17 years — prime numbers, mathematically precise — and emerges only when conditions are exactly right. Patient. Unhurried. Precise.
+      </p>
+      <p>
+        Cicada 3301 attracted people who refused to stop at the surface. It rewarded relentless curiosity, lateral thinking, and the willingness to find signal in noise. That is the approach applied to every engagement here — in governance, risk, and compliance where the real problem is rarely the visible one.
+      </p>
+      <p>
+        <strong>The mystery is the method.</strong> Excellence is not announced. It is found by those who know how to look.
+      </p>
+      <a href="https://en.wikipedia.org/wiki/Cicada_3301" target="_blank" rel="noopener noreferrer" class="modal-wiki">Read: Cicada 3301 on Wikipedia →</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="eyebrow">Strategic Security &amp; Public Interest</div>
+    <h1>High-Tier GRC<br><em>Architected for Trust.</em></h1>
+    <p class="hero-sub">From automated compliance for global financial institutions to data recovery for the public. Specialized advisory where technical depth meets societal resilience.</p>
+    <div class="hero-actions">
+      <a href="#enterprise" class="btn-primary">Enterprise Solutions</a>
+      <a href="#civil" class="btn-ghost">Civil Defense Services →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-content">
+      <div class="hero-stat-row">
+        <div class="hero-stat"><div class="hero-stat-num">NIST</div><div class="hero-stat-label">CSF 2.0 Aligned</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">FAIR</div><div class="hero-stat-label">Risk Quantification</div></div>
+      </div>
+      <div class="hero-network">
+        <div class="hero-network-label">Vetted Expert Network Member</div>
+        <div class="badge-row"><span class="badge">GLG</span><span class="badge">Guidepoint</span><span class="badge">AlphaSights</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-bar">
+  <span class="trust-label">Specializations</span>
+  <span class="trust-divider"></span><span class="trust-item">NIST CSF 2.0</span>
+  <span class="trust-divider"></span><span class="trust-item">IBM Guardium</span>
+  <span class="trust-divider"></span><span class="trust-item">Agentic AI Risk</span>
+  <span class="trust-divider"></span><span class="trust-item">SOC2 Mapping</span>
+  <span class="trust-divider"></span><span class="trust-item">Zero Trust Architecture</span>
+  <span class="trust-divider"></span><span class="trust-item">DevSecOps</span>
+  <span class="trust-divider"></span><span class="trust-item">FAIR Methodology</span>
+</div>
+
+<section id="enterprise" class="section dark-section">
+  <div class="section-header fade-up">
+    <div class="eyebrow">01 — Enterprise Solutions</div>
+    <h2>Scalable Governance &amp;<br>Technical Guardrails</h2>
+  </div>
+  <div class="service-grid">
+    <div class="service-card fade-up"><h3>Integrated Risk Management</h3><p>Quantitative risk analysis using FAIR methodologies. Scalable from single-app reviews to enterprise-wide frameworks across complex regulatory environments.</p><div class="tags"><span class="tag">FAIR</span><span class="tag">Quantitative Risk</span><span class="tag">IRM</span></div></div>
+    <div class="service-card fade-up"><h3>Architectural Guardrails</h3><p>Security Architecture Review specializing in IBM Guardium optimization and Zero Trust workload segmentation for hybrid and multi-cloud environments.</p><div class="tags"><span class="tag">IBM Guardium</span><span class="tag">Zero Trust</span><span class="tag">SAR</span></div></div>
+    <div class="service-card fade-up"><h3>Agentic AI Governance</h3><p>Risk frameworks for autonomous AI agents — covering prompt injection defense, automated privacy leakage detection, and LLM deployment guardrails.</p><div class="tags"><span class="tag">AI Security</span><span class="tag">LLM Ops</span><span class="tag">Prompt Defense</span></div></div>
+    <div class="service-card fade-up"><h3>Regulatory Engineering</h3><p>Automated compliance checkpoints embedded in CI/CD pipelines. Shift from periodic manual audits to continuous, evidence-based monitoring at scale.</p><div class="tags"><span class="tag">SOC2-as-Code</span><span class="tag">DevSecOps</span><span class="tag">CI/CD</span></div></div>
+  </div>
+</section>
+
+<section id="civil" class="section civil-section">
+  <div class="section-header fade-up">
+    <div class="eyebrow" style="color:var(--navy);">02 — Cicada Civil Defense</div>
+    <h2>Public Cyber Interest</h2>
+    <p style="margin-top:1rem; max-width:520px; font-size:0.78rem; opacity:0.58; line-height:1.9;">Expert knowledge shouldn't be locked behind a boardroom door. Specialized support for regular citizens and families facing digital crises.</p>
+  </div>
+  <div class="civil-grid">
+    <div class="civil-card fade-up"><div class="civil-card-num">01</div><h4>Data Recovery</h4><p>Technical advisory on recovering critical data from compromised cloud accounts or failed hardware devices. Clear guidance without the jargon.</p></div>
+    <div class="civil-card fade-up"><div class="civil-card-num">02</div><h4>Identity Restoration</h4><p>Step-by-step guidance for victims of identity theft to secure credentials, notify the right authorities, and clean up exposed digital footprints.</p></div>
+    <div class="civil-card fade-up"><div class="civil-card-num">03</div><h4>Cyber-Sikshak</h4><p>Free, simplified guides for families to protect children online and secure home IoT environments — in plain language, accessible to all.</p></div>
+  </div>
+</section>
+
+<section id="contact" class="section">
+  <div class="grid-2">
+    <div class="contact-left fade-up">
+      <div class="eyebrow">Inquiry</div>
+      <h2>Start a secure<br>conversation.</h2>
+      <p>All inquiries are handled via encrypted channels to ensure absolute client confidentiality. Enterprise and civil defense inquiries welcome.</p>
+      <div class="contact-detail">
+        <a href="mailto:advisory@cicadagrc.com">advisory@cicadagrc.com</a>
+        <a href="#enterprise">→ View Enterprise Solutions</a>
+        <a href="#civil">→ Civil Defense Services</a>
+      </div>
+    </div>
+    <div class="contact-form fade-up" id="contact-form-wrap">
+      <!-- Web3Forms hidden fields -->
+      <input type="hidden" name="access_key" value="b73a640e-81b6-4563-a37c-108aeb85f40c">
+      <input type="hidden" name="subject" value="New Inquiry — Cicada GRC Advisory">
+      <input type="hidden" name="from_name" value="Cicada GRC Website">
+      <input type="hidden" name="redirect" value="false">
+      <!-- Honeypot spam trap -->
+      <input type="checkbox" name="botcheck" style="display:none;">
+
+      <input type="text" name="name" placeholder="Full Name / Organization" autocomplete="name" required>
+      <input type="email" name="email" placeholder="Work Email" autocomplete="email" required>
+      <select name="inquiry_type" required>
+        <option value="">Select Inquiry Type</option>
+        <option>Enterprise GRC Advisory</option>
+        <option>AI Governance Framework</option>
+        <option>Civil Defense / Recovery Support</option>
+        <option>Expert Network Engagement</option>
+      </select>
+      <textarea name="message" placeholder="Briefly describe your challenge..." rows="5" required></textarea>
+      <button class="btn-primary" id="submit-btn" onclick="handleSubmit(event)">Send Encrypted Inquiry →</button>
+
+      <!-- Success / error states -->
+      <div id="form-success" style="display:none; background:rgba(26,53,96,0.08); border:1px solid var(--navy-light); padding:1.2rem 1.4rem; font-size:0.75rem; color:var(--navy); line-height:1.8;">
+        ✓ &nbsp;Your inquiry has been sent securely to advisory@cicadagrc.com. We will respond within 48 hours.
+      </div>
+      <div id="form-error" style="display:none; background:rgba(163,48,48,0.07); border:1px solid #a33; padding:1.2rem 1.4rem; font-size:0.75rem; color:#7a2020; line-height:1.8;">
+        ✕ &nbsp;Something went wrong. Please email us directly at <a href="mailto:advisory@cicadagrc.com" style="color:#7a2020;">advisory@cicadagrc.com</a>.
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">
+    <div class="brand-name">Cicada GRC Advisory</div>
+    <p>Architecting trust through transparency and technical rigor. Enterprise GRC meets public cyber interest.</p>
+  </div>
+  <div class="footer-col">
+    <h5>Services</h5>
+    <a href="#enterprise">Integrated Risk Management</a>
+    <a href="#enterprise">Architectural Guardrails</a>
+    <a href="#enterprise">Agentic AI Governance</a>
+    <a href="#enterprise">Regulatory Engineering</a>
+  </div>
+  <div class="footer-col">
+    <h5>Civil Defense</h5>
+    <a href="#civil">Data Recovery</a>
+    <a href="#civil">Identity Restoration</a>
+    <a href="#civil">Cyber-Sikshak</a>
+    <a href="mailto:advisory@cicadagrc.com">advisory@cicadagrc.com</a>
+  </div>
+</footer>
+<div class="footer-bottom">© 2026 Cicada GRC Advisory. All rights reserved.</div>
+
+<script>
+  const nav = document.getElementById('top-nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  document.querySelectorAll('.service-card, .civil-card').forEach((el, i) => { el.style.transitionDelay = (i % 2) * 0.1 + 's'; });
+
+  function openModal() { document.getElementById('cicada-bg').classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeModal() { document.getElementById('cicada-bg').classList.remove('open'); document.body.style.overflow = ''; }
+  function bgClose(e) { if (e.target === document.getElementById('cicada-bg')) closeModal(); }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    const wrap = document.getElementById('contact-form-wrap');
+    const successEl = document.getElementById('form-success');
+    const errorEl = document.getElementById('form-error');
+
+    // Validate
+    const fields = wrap.querySelectorAll('input[required], select[required], textarea[required]');
+    let valid = true;
+    fields.forEach(el => {
+      if (!el.value.trim()) { el.style.borderColor = '#a33'; valid = false; }
+      else { el.style.borderColor = ''; }
+    });
+    if (!valid) return;
+
+    // Loading state
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+
+    // Collect form data
+    const data = {};
+    wrap.querySelectorAll('input[name], select[name], textarea[name]').forEach(el => {
+      if (el.type !== 'checkbox') data[el.name] = el.value;
+    });
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const json = await res.json();
+      if (json.success) {
+        // Hide all inputs, show success
+        fields.forEach(el => el.style.display = 'none');
+        btn.style.display = 'none';
+        successEl.style.display = 'block';
+        errorEl.style.display = 'none';
+      } else {
+        throw new Error(json.message || 'Submission failed');
+      }
+    } catch (err) {
+      btn.textContent = 'Send Encrypted Inquiry →';
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      errorEl.style.display = 'block';
+      successEl.style.display = 'none';
+    }
+  }
+</script>
+</body>
+</html>
