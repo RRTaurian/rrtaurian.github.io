@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cicada GRC Advisory — On-Demand Consulting</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0d1117;
+    --paper: #f5f1eb;
+    --sage: #3d5a4c;
+    --gold: #b8963e;
+    --mist: #c8cfc8;
+    --soft: #e8e3da;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 3rem;
+    background: rgba(245, 241, 235, 0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--mist);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--sage);
+  }
+
+  .nav-logo span {
+    color: var(--gold);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    transition: opacity 0.2s, color 0.2s;
+  }
+
+  .nav-links a:hover { opacity: 1; color: var(--sage); }
+
+  .nav-cta {
+    background: var(--sage);
+    color: var(--paper) !important;
+    opacity: 1 !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 2px;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--gold) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+  }
+
+  .hero-left {
+    padding: 8rem 3rem 6rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: fadeUp 0.9s ease both;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5.2rem);
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--sage);
+  }
+
+  .hero-sub {
+    font-size: 0.8rem;
+    color: var(--ink);
+    opacity: 0.65;
+    max-width: 380px;
+    margin-bottom: 3rem;
+    line-height: 1.9;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--sage);
+    color: var(--paper);
+    padding: 0.9rem 2rem;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
+
+  .btn-ghost {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: opacity 0.2s;
+  }
+
+  .btn-ghost:hover { opacity: 1; }
+
+  .hero-right {
+    background: var(--sage);
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 1.2s ease both;
+  }
+
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.03) 40px,
+      rgba(255,255,255,0.03) 41px
+    );
+  }
+
+  .hero-right-inner {
+    position: absolute;
+    bottom: 3rem;
+    left: 3rem;
+    right: 3rem;
+    color: var(--paper);
+  }
+
+  .hero-stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .hero-stat {
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 1.2rem;
+  }
+
+  .hero-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--paper);
+    margin-bottom: 0.3rem;
+  }
+
+  .hero-stat-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 0.6rem 1rem;
+    border-radius: 2px;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  .dot { width: 6px; height: 6px; background: #6fc88a; border-radius: 50%; animation: pulse 2s infinite; }
+
+  /* TRUST BAR */
+  .trust-bar {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1.2rem 4rem;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    overflow: hidden;
+  }
+
+  .trust-bar-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.4;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .trust-bar-items {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .trust-item {
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    white-space: nowrap;
+  }
+
+  /* HOW IT WORKS */
+  .section { padding: 7rem 4rem; }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 600;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-sub {
+    max-width: 480px;
+    opacity: 0.6;
+    font-size: 0.8rem;
+    line-height: 1.9;
+    margin-bottom: 4rem;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+
+  .step {
+    padding: 3rem 2.5rem;
+    border: 1px solid var(--mist);
+    margin: -1px 0 0 -1px;
+    position: relative;
+    transition: background 0.3s;
+  }
+
+  .step:hover { background: var(--soft); }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 600;
+    color: var(--mist);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+
+  .step-body { font-size: 0.78rem; opacity: 0.6; line-height: 1.9; }
+
+  /* SERVICES */
+  .services-section {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .services-section .section-label { color: var(--gold); }
+  .services-section .section-label::before { background: var(--gold); }
+  .services-section h2 { color: var(--paper); }
+  .services-section .section-sub { color: var(--paper); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .service-card {
+    background: var(--ink);
+    padding: 3rem;
+    transition: background 0.3s;
+    cursor: default;
+  }
+
+  .service-card:hover { background: var(--sage); }
+
+  .service-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.7;
+  }
+
+  .service-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: var(--paper);
+  }
+
+  .service-body { font-size: 0.78rem; opacity: 0.55; line-height: 1.9; color: var(--paper); }
+
+  .service-tags {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 1px;
+    color: var(--paper);
+    opacity: 0.5;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--soft);
+    padding: 7rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+  label {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  input, textarea, select {
+    background: var(--paper);
+    border: 1px solid var(--mist);
+    padding: 0.85rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--ink);
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: vertical;
+  }
+
+  input:focus, textarea:focus, select:focus { border-color: var(--sage); }
+
+  .submit-btn {
+    background: var(--sage);
+    color: var(--paper);
+    border: none;
+    padding: 1rem 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s;
+    align-self: flex-start;
+    margin-top: 0.5rem;
+  }
+
+  .submit-btn:hover { background: var(--gold); }
+
+  .contact-info h2 { margin-bottom: 1.5rem; }
+
+  .contact-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .contact-row {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--mist);
+  }
+
+  .contact-row-icon { opacity: 0.4; flex-shrink: 0; margin-top: 2px; }
+  .contact-row-label { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.4; margin-bottom: 0.2rem; }
+  .contact-row-value { font-size: 0.85rem; }
+  .contact-row-value a { color: var(--sage); text-decoration: none; }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2.5rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.65rem;
+    opacity: 0.7;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--paper);
+    opacity: 1;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 340px; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .contact-section { grid-template-columns: 1fr; gap: 3rem; }
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .section { padding: 5rem 1.5rem; }
+    .trust-bar { padding: 1.2rem 1.5rem; }
+    .hero-left { padding: 5rem 1.5rem 3rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .contact-section { padding: 5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Cicada<span> GRC</span> Advisory</div>
+  <ul class="nav-links">
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Book a Call</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">On-Demand GRC Consulting</div>
+    <h1>Expert guidance,<br><em>when you need it.</em></h1>
+    <p class="hero-sub">Governance, Risk &amp; Compliance advisory tailored to your business — no retainers, no overhead. Engage directly with a senior advisor at the moment it matters most.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Book a Discovery Call</a>
+      <a href="#services" class="btn-ghost">View Services →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-inner">
+      <div class="hero-stat-grid">
+        <div class="hero-stat">
+          <div class="hero-stat-num">48h</div>
+          <div class="hero-stat-label">Typical first response</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">100%</div>
+          <div class="hero-stat-label">Senior-level advisors</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">No</div>
+          <div class="hero-stat-label">Long-term retainers required</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">∞</div>
+          <div class="hero-stat-label">Scalable engagement model</div>
+        </div>
+      </div>
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Currently accepting new clients
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <span class="trust-bar-label">Areas of expertise</span>
+  <div class="trust-bar-items">
+    <span class="trust-item">ISO 27001</span>
+    <span class="trust-item">SOC 2</span>
+    <span class="trust-item">NIST CSF</span>
+    <span class="trust-item">GDPR / POPIA</span>
+    <span class="trust-item">Risk Assessments</span>
+    <span class="trust-item">Policy Development</span>
+    <span class="trust-item">Audit Readiness</span>
+    <span class="trust-item">Third-Party Risk</span>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how-it-works">
+  <div class="section-label">Process</div>
+  <h2>Simple. Transparent.<br>On your schedule.</h2>
+  <p class="section-sub">We've stripped away the complexity of traditional consulting. Get the expert advice you need without the friction.</p>
+
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Submit Your Brief</div>
+      <p class="step-body">Describe your challenge, timeline, and desired outcome using our structured intake form. Takes less than 5 minutes.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">Discovery Call</div>
+      <p class="step-body">A 30-minute scoping call to understand your environment, risk appetite, and what a successful outcome looks like for your team.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Receive a Proposal</div>
+      <p class="step-body">A clear scope-of-work with fixed pricing or a defined hourly engagement — no surprises, no runaway fees.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-title">Work Begins</div>
+      <p class="step-body">We engage immediately. You'll have direct access to your advisor throughout — not an account manager acting as a middleman.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">05</div>
+      <div class="step-title">Delivery &amp; Handover</div>
+      <p class="step-body">Practical, actionable deliverables — not slide decks. Implementation guidance included so recommendations actually get executed.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">06</div>
+      <div class="step-title">Ongoing Access</div>
+      <p class="step-body">Need follow-up support? Re-engage at any time without re-scoping from scratch. Your context stays with us.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section services-section" id="services">
+  <div class="section-label">Services</div>
+  <h2>What we can<br>help you with</h2>
+  <p class="section-sub">From framework implementation to urgent risk reviews — structured, experienced support across the GRC spectrum.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🛡️</div>
+      <div class="service-title">Risk Assessments</div>
+      <p class="service-body">Structured identification, analysis, and prioritisation of your organisation's information and operational risks — aligned to your industry and regulatory context.</p>
+      <div class="service-tags">
+        <span class="tag">Enterprise Risk</span>
+        <span class="tag">Cyber Risk</span>
+        <span class="tag">Third-Party Risk</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📋</div>
+      <div class="service-title">Compliance Readiness</div>
+      <p class="service-body">Gap assessments and roadmaps for ISO 27001, SOC 2, NIST CSF, GDPR, and POPIA — preparing your organisation before an auditor walks through the door.</p>
+      <div class="service-tags">
+        <span class="tag">ISO 27001</span>
+        <span class="tag">SOC 2</span>
+        <span class="tag">POPIA</span>
+        <span class="tag">GDPR</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📄</div>
+      <div class="service-title">Policy &amp; Framework Development</div>
+      <p class="service-body">Practical, enforceable policies tailored to your operations — not generic templates. We build governance artefacts your teams will actually use.</p>
+      <div class="service-tags">
+        <span class="tag">ISMS</span>
+        <span class="tag">Security Policies</span>
+        <span class="tag">Procedures</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔍</div>
+      <div class="service-title">Advisory &amp; On-Call Support</div>
+      <p class="service-body">Fractional CISO or compliance officer support. Attend your board meetings, steer your programme, or simply be the expert on the other end of the line when it counts.</p>
+      <div class="service-tags">
+        <span class="tag">vCISO</span>
+        <span class="tag">Fractional Advisory</span>
+        <span class="tag">On-Demand</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-info">
+    <div class="section-label">Get in Touch</div>
+    <h2>Start a<br>conversation</h2>
+    <p class="section-sub" style="margin-bottom:0">No commitment required. Tell us what you're dealing with and we'll respond within 24 hours with honest advice on how we can help.</p>
+
+    <div class="contact-detail">
+      <div class="contact-row">
+        <div class="contact-row-icon">✉</div>
+        <div>
+          <div class="contact-row-label">Email</div>
+          <div class="contact-row-value"><a href="mailto:advisory@cicadagrc.com">advisory@cicadagrc.com</a></div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-row-icon">⏱</div>
+        <div>
+          <div class="contact-row-label">Response Time</div>
+          <div class="contact-row-value">Within 24–48 business hours</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-row-icon">🌍</div>
+        <div>
+          <div class="contact-row-label">Clients Served</div>
+          <div class="contact-row-value">Remote-first, globally available</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form class="contact-form" onsubmit="handleSubmit(event)">
+    <div class="form-group">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Jane Smith" required>
+    </div>
+    <div class="form-group">
+      <label for="org">Organisation</label>
+      <input type="text" id="org" placeholder="Acme Corp" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Work Email</label>
+      <input type="email" id="email" placeholder="jane@acmecorp.com" required>
+    </div>
+    <div class="form-group">
+      <label for="service">Area of Need</label>
+      <select id="service">
+        <option value="">Select a service...</option>
+        <option>Risk Assessment</option>
+        <option>Compliance Readiness (ISO 27001 / SOC 2)</option>
+        <option>Policy &amp; Framework Development</option>
+        <option>Fractional / On-Call Advisory</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="message">Describe Your Challenge</label>
+      <textarea id="message" rows="5" placeholder="Brief description of your situation, timeline, and what success looks like..."></textarea>
+    </div>
+    <button type="submit" class="submit-btn">Send Enquiry →</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Cicada GRC Advisory</div>
+  <div>© 2026 Cicada GRC Advisory. All rights reserved.</div>
+  <div>advisory@cicadagrc.com</div>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.submit-btn');
+    btn.textContent = 'Sent ✓';
+    btn.style.background = '#3d5a4c';
+    btn.disabled = true;
+    // In production: connect to Formspree, Netlify Forms, or your backend
+    // e.g. mailto:advisory@cicadagrc.com or a form API
+  }
+
+  // Scroll-reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.step, .service-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
