@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cicada GRC Advisory — Expert Cybersecurity & Civil Defense</title>
+<meta name="description" content="High-tier Governance, Risk & Compliance advisory. Automated compliance for global enterprises and public cyber interest services for citizens.">
+<meta property="og:title" content="Cicada GRC Advisory">
+<meta property="og:description" content="Architected for trust. From enterprise GRC to civil defense — specialized advisory where technical depth meets societal resilience.">
+<meta property="og:type" content="website">
+<!-- Favicon: SVG inline — works in all modern browsers. Also provide a 32×32 PNG named favicon.png in repo root for legacy support. -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230f2345'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%23c9a84c' stroke-width='1.5'/%3E%3Ccircle cx='16' cy='16' r='4' fill='none' stroke='%23c9a84c' stroke-width='1'/%3E%3Ccircle cx='16' cy='16' r='1.8' fill='%23c9a84c'/%3E%3Cline x1='16' y1='6' x2='16' y2='12' stroke='%23c9a84c' stroke-width='1'/%3E%3Cline x1='16' y1='20' x2='16' y2='26' stroke='%23c9a84c' stroke-width='1'/%3E%3Cline x1='6' y1='16' x2='12' y2='16' stroke='%23c9a84c' stroke-width='1'/%3E%3Cline x1='20' y1='16' x2='26' y2='16' stroke='%23c9a84c' stroke-width='1'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:       #0f2345;
+    --navy-mid:   #1a3560;
+    --navy-light: #2a4a7f;
+    --gold:       #c9a84c;
+    --gold-light: #e2c06a;
+    --cream:      #f8f5ef;
+    --cream-dark: #ede8df;
+    --ink:        #0f1923;
+    --mist:       #c5cdd8;
+    --nav-h:      72px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9000;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    height: var(--nav-h);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3rem;
+    background: rgba(248,245,239,0.93);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(197,205,216,0.5);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 24px rgba(15,35,69,0.1); }
+
+  /* ── LOGO — bigger, bolder, commanding ── */
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--navy);
+    text-decoration: none;
+    line-height: 1;
+    display: flex;
+    align-items: baseline;
+  }
+  .logo-grc { color: var(--gold); font-weight: 700; }
+  .logo-advisory { font-style: italic; font-weight: 600; color: var(--navy-light); font-size: 1.1rem; margin-left: 0.22rem; }
+
+  .nav-right { display: flex; align-items: center; gap: 1rem; }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.55;
+    transition: opacity 0.2s, color 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--navy); }
+
+  .nav-cta {
+    background: var(--navy) !important;
+    color: var(--cream) !important;
+    opacity: 1 !important;
+    padding: 0.5rem 1.3rem;
+    border-radius: 2px;
+    font-size: 0.67rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--navy-light) !important; transform: translateY(-1px); }
+
+  /* ── CICADA 3301 ORB ── */
+  .cicada-orb {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--navy);
+    border: 1.5px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+    flex-shrink: 0;
+    padding: 0;
+  }
+  .cicada-orb:hover { transform: scale(1.1) rotate(18deg); box-shadow: 0 0 20px rgba(201,168,76,0.4); }
+  .cicada-orb svg { width: 20px; height: 20px; display: block; }
+
+  /* Modal */
+  .cicada-modal-bg {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15,35,69,0.72);
+    z-index: 5000;
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .cicada-modal-bg.open { display: flex; animation: bgIn 0.3s ease both; }
+  @keyframes bgIn { from { opacity:0; } to { opacity:1; } }
+
+  .cicada-modal {
+    background: var(--navy);
+    color: var(--cream);
+    max-width: 640px;
+    width: 100%;
+    border: 1px solid rgba(201,168,76,0.28);
+    max-height: 88vh;
+    overflow-y: auto;
+    animation: modalUp 0.35s cubic-bezier(0.34,1.2,0.64,1) both;
+  }
+  @keyframes modalUp { from { transform: translateY(22px); opacity:0; } to { transform: translateY(0); opacity:1; } }
+
+  .modal-header {
+    padding: 2.5rem 2.5rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .modal-eyebrow {
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .modal-eyebrow::before { content:''; width:1.2rem; height:1px; background:var(--gold); flex-shrink:0; }
+  .modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.85rem;
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--cream);
+  }
+  .modal-close {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--cream);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s;
+    line-height: 1;
+    font-family: 'DM Mono', monospace;
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.13); }
+
+  .modal-body { padding: 2rem 2.5rem 2.5rem; }
+  .modal-body p { font-size: 0.79rem; opacity: 0.7; line-height: 1.95; margin-bottom: 1.2rem; }
+  .modal-body strong { color: var(--gold-light); font-weight: 400; }
+
+  .modal-quote {
+    background: rgba(255,255,255,0.04);
+    border-left: 2px solid var(--gold);
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.08rem;
+    font-style: italic;
+    color: rgba(248,245,239,0.82);
+    line-height: 1.6;
+  }
+  .modal-quote cite { display: block; margin-top: 0.6rem; font-family: 'DM Mono', monospace; font-style: normal; font-size: 0.62rem; opacity: 0.45; }
+
+  .modal-divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 1.5rem 0; }
+
+  .modal-wiki {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--gold-light);
+    text-decoration: none;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+    padding-bottom: 2px;
+    opacity: 0.8;
+    transition: opacity 0.2s, border-color 0.2s;
+    margin-top: 0.5rem;
+  }
+  .modal-wiki:hover { opacity: 1; border-color: var(--gold-light); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: var(--nav-h);
+  }
+
+  .hero-left {
+    padding: 7rem 3.5rem 6rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: fadeUp 1s ease both;
+  }
+
+  .eyebrow {
+    font-size: 0.63rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .eyebrow::before { content:''; width:2rem; height:1px; background:var(--gold); flex-shrink:0; }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 4.5vw, 5rem);
+    font-weight: 700;
+    line-height: 1.08;
+    margin-bottom: 2rem;
+    color: var(--navy);
+  }
+  h1 em { font-style: italic; color: var(--navy-light); font-weight: 600; }
+
+  .hero-sub { font-size: 0.78rem; color: var(--ink); opacity: 0.52; max-width: 400px; margin-bottom: 3rem; line-height: 1.9; }
+
+  .hero-actions { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 0.9rem 2rem;
+    text-decoration: none;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    transition: background 0.2s, transform 0.15s;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Mono', monospace;
+  }
+  .btn-primary:hover { background: var(--navy-light); transform: translateY(-2px); }
+
+  .btn-ghost { color: var(--navy-light); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.08em; opacity: 0.8; transition: opacity 0.2s; display: flex; align-items: center; gap: 5px; }
+  .btn-ghost:hover { opacity: 1; }
+
+  .hero-right {
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.025) 39px, rgba(255,255,255,0.025) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.025) 39px, rgba(255,255,255,0.025) 40px);
+  }
+  .hero-right::after {
+    content: '';
+    position: absolute;
+    top: -8%;
+    right: -5%;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.1);
+    pointer-events: none;
+  }
+  .hero-right-content { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 3rem; }
+  .hero-stat-row { display: flex; gap: 1.5rem; margin-bottom: 2.5rem; }
+  .hero-stat { background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.18); padding: 1.2rem 1.5rem; flex: 1; }
+  .hero-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: var(--gold-light); line-height: 1; margin-bottom: 4px; font-weight: 600; }
+  .hero-stat-label { font-size: 0.57rem; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255,255,255,0.38); }
+  .hero-network { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 1.5rem; }
+  .hero-network-label { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.18em; color: rgba(255,255,255,0.28); margin-bottom: 10px; }
+  .badge-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .badge { font-size: 0.62rem; border: 1px solid rgba(201,168,76,0.22); color: rgba(255,255,255,0.62); padding: 4px 10px; letter-spacing: 0.06em; }
+
+  /* World map SVG styling */
+  .hero-world-map {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    filter: drop-shadow(0 0 20px rgba(0,0,0,0.3));
+  }
+  .hero-right-text {
+    position: absolute;
+    top: 2.5rem;
+    left: 2.5rem;
+    z-index: 15;
+    background: rgba(15,35,69,0.82);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 2rem 2.2rem;
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 6px;
+    max-width: 320px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  .hero-text-label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(201,168,76,0.8);
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+  .hero-text-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .hero-text-desc {
+    font-size: 0.73rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.8;
+    margin: 0;
+  }
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+    flex-shrink: 0;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--navy);
+    transition: transform 0.25s, opacity 0.25s;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: var(--nav-h);
+    left: 0; right: 0;
+    background: rgba(248,245,239,0.98);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--mist);
+    z-index: 190;
+    padding: 1.5rem 1.5rem 2rem;
+    flex-direction: column;
+    gap: 0;
+  }
+  .mobile-menu.open { display: flex; animation: slideDown 0.22s ease both; }
+  @keyframes slideDown { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+  .mobile-menu a {
+    display: block;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid rgba(197,205,216,0.4);
+    opacity: 0.7;
+    transition: opacity 0.2s, color 0.2s;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:hover { opacity: 1; color: var(--navy); }
+  .mobile-menu .mob-cta {
+    margin-top: 1rem;
+    background: var(--navy);
+    color: var(--cream) !important;
+    opacity: 1 !important;
+    text-align: center;
+    padding: 0.75rem;
+    border-radius: 2px;
+    border-bottom: none !important;
+  }
+  .trust-bar {
+    background: var(--navy-mid);
+    color: var(--cream);
+    padding: 1.2rem 4rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .trust-bar::-webkit-scrollbar { display: none; }
+  .trust-label { font-size: 0.56rem; text-transform: uppercase; letter-spacing: 0.18em; opacity: 0.28; white-space: nowrap; flex-shrink: 0; }
+  .trust-divider { width: 1px; height: 18px; background: rgba(255,255,255,0.09); flex-shrink: 0; }
+  .trust-item { font-size: 0.62rem; opacity: 0.48; white-space: nowrap; letter-spacing: 0.08em; }
+
+  /* Sections */
+  .section { padding: 7rem 4rem; border-bottom: 1px solid var(--mist); }
+  .section-header { margin-bottom: 4rem; }
+  .dark-section { background: var(--navy); color: var(--cream); border-bottom: none; }
+  .dark-section .eyebrow { color: rgba(201,168,76,0.75); }
+  .dark-section h2 { color: var(--cream); }
+
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 700; line-height: 1.1; margin-top: 1rem; color: var(--navy); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+  /* Enterprise cards — floating elevated style */
+  .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-top: 3rem; background: transparent; }
+  .service-card { 
+    background: linear-gradient(135deg, rgba(42,74,127,0.6), rgba(26,53,96,0.4));
+    padding: 2.8rem;
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 6px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.16), inset 0 1px 0 rgba(255,255,255,0.08);
+    transform: translateY(0);
+  }
+  .service-card::before { content:''; position:absolute; top:0; left:0; width:0; height:3px; background:var(--gold); border-radius:3px; transition:width 0.4s ease; }
+  .service-card:hover { 
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.1);
+    border-color: rgba(201,168,76,0.3);
+    background: linear-gradient(135deg, rgba(42,74,127,0.8), rgba(26,53,96,0.6));
+  }
+  .service-card:hover::before { width: 100%; }
+  .service-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--cream); margin-bottom: 14px; }
+  .service-card p { font-size: 0.75rem; opacity: 0.65; line-height: 1.85; margin-bottom: 1.4rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 0.56rem; border: 1px solid rgba(201,168,76,0.35); color: var(--gold-light); padding: 3px 8px; text-transform: uppercase; letter-spacing: 0.08em; border-radius: 2px; }
+
+  /* Service Detail Modals */
+  .service-modal-bg {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15,35,69,0.75);
+    z-index: 4800;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .service-modal-bg.open { display: flex; animation: bgIn 0.25s ease both; }
+  .service-modal {
+    background: var(--navy);
+    color: var(--cream);
+    max-width: 720px;
+    width: 100%;
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 8px;
+    max-height: 85vh;
+    overflow-y: auto;
+    animation: modalUp 0.35s cubic-bezier(0.34,1.2,0.64,1) both;
+  }
+  .service-modal-header {
+    padding: 2.5rem 3rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  .service-modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--cream);
+  }
+  .service-modal-close {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--cream);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s;
+    line-height: 1;
+    font-family: 'DM Mono', monospace;
+  }
+  .service-modal-close:hover { background: rgba(255,255,255,0.14); }
+  .service-modal-body { padding: 2rem 3rem; }
+  .service-modal-body h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--gold-light);
+    margin: 1.5rem 0 0.8rem 0;
+    font-weight: 600;
+  }
+  .service-modal-body h4:first-child { margin-top: 0; }
+  .service-modal-body p { font-size: 0.78rem; opacity: 0.68; line-height: 1.9; margin-bottom: 0.8rem; }
+  .service-modal-body ul {
+    font-size: 0.77rem;
+    opacity: 0.65;
+    line-height: 1.9;
+    margin-left: 1.5rem;
+    list-style: disc;
+  }
+  .service-modal-body li { margin-bottom: 0.5rem; }
+  .civil-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+  .civil-card { 
+    background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(237,232,223,0.6));
+    padding: 2.5rem;
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 6px;
+    transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    transform: translateY(0);
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(15,35,69,0.12), inset 0 1px 0 rgba(255,255,255,0.4);
+  }
+  .civil-card:hover { 
+    transform: translateY(-6px);
+    box-shadow: 0 12px 36px rgba(15,35,69,0.2), inset 0 1px 0 rgba(255,255,255,0.6);
+    border-color: var(--navy-light);
+    background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(237,232,223,0.8));
+  }
+  .civil-card-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--mist); line-height: 1; margin-bottom: 1rem; opacity: 0.6; }
+  .civil-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; margin-bottom: 10px; color: var(--navy); }
+  .civil-card p { font-size: 0.75rem; opacity: 0.62; line-height: 1.85; }
+
+  .contact-left { padding-right: 4rem; }
+  .contact-left p { margin-top: 1rem; font-size: 0.75rem; opacity: 0.55; line-height: 1.9; max-width: 360px; }
+  .contact-detail { margin-top: 2rem; display: flex; flex-direction: column; gap: 6px; }
+  .contact-detail a { color: var(--navy-light); text-decoration: none; font-size: 0.72rem; opacity: 0.8; transition: opacity 0.2s; }
+  .contact-detail a:hover { opacity: 1; }
+
+  .contact-form { display: flex; flex-direction: column; gap: 12px; }
+  .contact-form input, .contact-form select, .contact-form textarea {
+    padding: 14px 16px;
+    background: var(--cream-dark);
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.73rem;
+    color: var(--ink);
+    transition: border-color 0.2s;
+    outline: none;
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { border-color: var(--navy-light); }
+  .contact-form textarea { resize: vertical; min-height: 120px; }
+
+  footer { background: var(--navy); color: var(--cream); padding: 4rem; display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 3rem; border-top: 1px solid rgba(255,255,255,0.05); }
+  .footer-brand .brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--gold-light); margin-bottom: 10px; font-weight: 700; }
+  .footer-brand p { font-size: 0.7rem; opacity: 0.38; line-height: 1.8; max-width: 240px; }
+  .footer-col h5 { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.18em; opacity: 0.28; margin-bottom: 1rem; }
+  .footer-col a { display: block; text-decoration: none; color: var(--cream); font-size: 0.72rem; opacity: 0.46; margin-bottom: 8px; transition: opacity 0.2s; }
+  .footer-col a:hover { opacity: 1; }
+  .footer-bottom { background: var(--navy); padding: 1.2rem 4rem; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 0.6rem; color: var(--cream); opacity: 0.22; }
+
+  [id] { scroll-margin-top: calc(var(--nav-h) + 1.5rem); }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+  .fade-up { opacity:0; transform:translateY(20px); transition:opacity 0.65s ease, transform 0.65s ease; }
+  .fade-up.visible { opacity:1; transform:translateY(0); }
+
+  /* ── WHO WE ARE section ── */
+  .who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+  .who-principle { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; margin-top: 1.5rem; }
+  .who-principle h4 { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; color: var(--gold-light); margin-bottom: 6px; }
+  .who-principle p { font-size: 0.74rem; opacity: 0.55; line-height: 1.85; }
+  .who-anon-box {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 2rem;
+  }
+  .who-anon-box h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--gold-light); margin-bottom: 1rem; font-weight: 600; }
+  .who-anon-box p { font-size: 0.74rem; opacity: 0.6; line-height: 1.9; margin-bottom: 0.8rem; }
+  .who-anon-box p:last-child { margin-bottom: 0; }
+
+  /* ── ENGAGEMENT MODEL section ── */
+  .engagement-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .eng-card { border-top: 2px solid var(--gold); padding-top: 1.5rem; }
+  .eng-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
+  .eng-card p { font-size: 0.73rem; opacity: 0.6; line-height: 1.85; }
+
+  /* ── PRESENCE section ── */
+  .presence-section { background: var(--navy); color: var(--cream); }
+  .presence-section .eyebrow { color: rgba(201,168,76,0.75); }
+  .presence-section h2 { color: var(--cream); }
+  .presence-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+  .presence-card { border-left: 2px solid rgba(201,168,76,0.3); padding-left: 1.5rem; }
+  .presence-city { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--gold-light); line-height: 1.1; margin-bottom: 4px; }
+  .presence-region { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.16em; opacity: 0.35; margin-bottom: 10px; }
+  .presence-note { font-size: 0.73rem; opacity: 0.52; line-height: 1.8; }
+  .presence-address-note { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.07); font-size: 0.72rem; opacity: 0.45; line-height: 1.8; max-width: 560px; }
+
+  @media (max-width: 900px) {
+    /* NAV — hamburger takes over */
+    nav { padding: 0 1.2rem; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    .nav-logo { font-size: 1.1rem; }
+    .logo-advisory { font-size: 0.85rem; }
+    /* hide orb text overflow on mobile */
+    .cicada-orb { width: 36px; height: 36px; }
+
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 260px; }
+    .hero-left { padding: 4.5rem 1.5rem 3rem; }
+    .section { padding: 4rem 1.5rem; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .service-grid { grid-template-columns: 1fr; }
+    .civil-grid { grid-template-columns: 1fr; }
+    .who-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .engagement-grid { grid-template-columns: 1fr; }
+    .presence-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .contact-left { padding-right: 0; margin-bottom: 2rem; }
+    footer { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem; }
+    .footer-bottom { padding: 1rem 1.5rem; }
+    .hero-stat-row { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="top-nav">
+  <a href="#" class="nav-logo">Cicada<span class="logo-grc">&nbsp;GRC</span><span class="logo-advisory">&nbsp;Advisory</span></a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#who">Who We Are</a></li>
+      <li><a href="#enterprise">Enterprise</a></li>
+      <li><a href="#civil">Civil Defense</a></li>
+      <li><a href="#contact" class="nav-cta">Book Consultation</a></li>
+    </ul>
+    <button class="cicada-orb" onclick="openModal()" title="The philosophy behind the name" aria-label="Learn about Cicada 3301">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="9" stroke="#c9a84c" stroke-width="1.2"/>
+        <circle cx="12" cy="12" r="3.5" stroke="#c9a84c" stroke-width="1"/>
+        <line x1="12" y1="3" x2="12" y2="8.5" stroke="#c9a84c" stroke-width="1"/>
+        <line x1="12" y1="15.5" x2="12" y2="21" stroke="#c9a84c" stroke-width="1"/>
+        <line x1="3" y1="12" x2="8.5" y2="12" stroke="#c9a84c" stroke-width="1"/>
+        <line x1="15.5" y1="12" x2="21" y2="12" stroke="#c9a84c" stroke-width="1"/>
+        <circle cx="12" cy="12" r="1.4" fill="#c9a84c"/>
+      </svg>
+    </button>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#who" onclick="closeMobileMenu()">Who We Are</a>
+  <a href="#enterprise" onclick="closeMobileMenu()">Enterprise</a>
+  <a href="#civil" onclick="closeMobileMenu()">Civil Defense</a>
+  <a href="#contact" class="mob-cta" onclick="closeMobileMenu()">Book Consultation</a>
+</div>
+
+<!-- CICADA 3301 MODAL -->
+<div class="cicada-modal-bg" id="cicada-bg" onclick="bgClose(event)">
+  <div class="cicada-modal" role="dialog" aria-modal="true">
+    <div class="modal-header">
+      <div>
+        <div class="modal-eyebrow">The Philosophy Behind the Name</div>
+        <h2 class="modal-title">Cicada 3301 —<br>The Internet's Greatest Mystery</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <p>
+        In January 2012, a cryptic image appeared on 4chan. It contained a hidden message. Solving it led to another puzzle. Then another. The trail spanned <strong>number theory, steganography, ancient Mayan numerology, runic ciphers, and physical posters appearing simultaneously in Warsaw, Paris, Seoul, and Dallas</strong> — all signed only "3301".
+      </p>
+      <p>
+        The puzzles were extraordinarily sophisticated — recruiting only the most determined minds through layers of encryption, Tor hidden services, and GPS coordinates to real-world dead drops. Three consecutive years of puzzles. Then silence. <strong>No organisation ever claimed authorship.</strong>
+      </p>
+      <div class="modal-quote">
+        "The best minds are not in government. If you think you have the skills to help us, come find us."
+        <cite>— Cicada 3301, 2012</cite>
+      </div>
+      <hr class="modal-divider">
+      <p>
+        The name <strong>Cicada</strong> was chosen for this firm because it embodies a philosophy that shapes everything here. A cicada lives underground for 13 or 17 years — prime numbers, mathematically precise — and emerges only when conditions are exactly right. Patient. Unhurried. Precise.
+      </p>
+      <p>
+        Cicada 3301 attracted people who refused to stop at the surface. It rewarded relentless curiosity, lateral thinking, and the willingness to find signal in noise. That is the approach applied to every engagement here — in governance, risk, and compliance where the real problem is rarely the visible one.
+      </p>
+      <p>
+        <strong>The mystery is the method.</strong> Excellence is not announced. It is found by those who know how to look.
+      </p>
+      <a href="https://en.wikipedia.org/wiki/Cicada_3301" target="_blank" rel="noopener noreferrer" class="modal-wiki">Read: Cicada 3301 on Wikipedia →</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="eyebrow">Strategic Security &amp; Public Interest</div>
+    <h1>High-Tier GRC<br><em>Architected for Trust.</em></h1>
+    <p class="hero-sub">From automated compliance for global financial institutions to data recovery for the public. Specialized advisory where technical depth meets societal resilience.</p>
+    <div class="hero-actions">
+      <a href="#enterprise" class="btn-primary">Enterprise Solutions</a>
+      <a href="#civil" class="btn-ghost">Civil Defense Services →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <svg class="hero-world-map" viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg">
+      <!-- Subtle gradient background -->
+      <defs>
+        <linearGradient id="mapGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#1a3560;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#0f2345;stop-opacity:1" />
+        </linearGradient>
+        <radialGradient id="heatPulse" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" style="stop-color:#e2c06a;stop-opacity:0.8" />
+          <stop offset="100%" style="stop-color:#c9a84c;stop-opacity:0.15" />
+        </radialGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+        <filter id="mapShadow">
+          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-opacity="0.4"/>
+        </filter>
+      </defs>
+      
+      <!-- Background -->
+      <rect width="960" height="540" fill="url(#mapGradient)"/>
+      
+      <!-- Simplified world outline (stylized) — more visible -->
+      <g opacity="0.25" stroke="#c9a84c" stroke-width="1.5" fill="none">
+        <!-- North America -->
+        <path d="M 100 150 L 150 140 L 160 200 L 120 220 Z"/>
+        <!-- South America -->
+        <path d="M 150 250 L 170 280 L 160 350 L 140 320 Z"/>
+        <!-- Europe -->
+        <path d="M 350 100 L 420 90 L 440 160 L 380 170 Z"/>
+        <!-- Africa -->
+        <path d="M 420 180 L 480 200 L 470 350 L 400 320 Z"/>
+        <!-- Asia -->
+        <path d="M 500 120 L 650 110 L 680 280 L 550 270 Z"/>
+        <!-- Australia -->
+        <path d="M 700 350 L 740 360 L 735 420 L 695 410 Z"/>
+      </g>
+
+      <!-- Layer 1: Individuals (scattered, small) -->
+      <g id="individuals" opacity="0.8">
+        <circle cx="120" cy="200" r="3" fill="#d4ae5a" filter="url(#glow)"/>
+        <circle cx="280" cy="320" r="2.5" fill="#d4ae5a" filter="url(#glow)"/>
+        <circle cx="450" cy="280" r="2.8" fill="#d4ae5a" filter="url(#glow)"/>
+        <circle cx="620" cy="350" r="2.5" fill="#d4ae5a" filter="url(#glow)"/>
+        <circle cx="750" cy="300" r="2.8" fill="#d4ae5a" filter="url(#glow)"/>
+        <circle cx="180" cy="420" r="2.2" fill="#d4ae5a" filter="url(#glow)"/>
+        <circle cx="530" cy="410" r="2.5" fill="#d4ae5a" filter="url(#glow)"/>
+      </g>
+
+      <!-- Layer 2: Startups (clusters at innovation hubs) — enhanced visibility -->
+      <g id="startups" opacity="1">
+        <!-- Silicon Valley -->
+        <circle cx="80" cy="160" r="10" fill="#e2c06a" opacity="0.35"/>
+        <circle cx="78" cy="158" r="5" fill="#e2c06a" filter="url(#glow)"/>
+        <circle cx="85" cy="162" r="4.5" fill="#e2c06a" filter="url(#glow)"/>
+        <circle cx="80" cy="168" r="4" fill="#e2c06a" filter="url(#glow)"/>
+        
+        <!-- London -->
+        <circle cx="360" cy="120" r="10" fill="#e2c06a" opacity="0.35"/>
+        <circle cx="358" cy="118" r="5" fill="#e2c06a" filter="url(#glow)"/>
+        <circle cx="365" cy="122" r="4.5" fill="#e2c06a" filter="url(#glow)"/>
+        
+        <!-- Bengaluru -->
+        <circle cx="570" cy="240" r="11" fill="#e2c06a" opacity="0.4"/>
+        <circle cx="568" cy="238" r="5.5" fill="#e2c06a" filter="url(#glow)"/>
+        <circle cx="575" cy="243" r="5" fill="#e2c06a" filter="url(#glow)"/>
+        <circle cx="570" cy="250" r="4.5" fill="#e2c06a" filter="url(#glow)"/>
+        
+        <!-- Singapore -->
+        <circle cx="630" cy="280" r="10" fill="#e2c06a" opacity="0.35"/>
+        <circle cx="628" cy="278" r="5" fill="#e2c06a" filter="url(#glow)"/>
+        <circle cx="635" cy="283" r="4.5" fill="#e2c06a" filter="url(#glow)"/>
+      </g>
+
+      <!-- Layer 3: Global Organizations (interconnected networks) -->
+      <g id="global-orgs" stroke="#c9a84c" stroke-width="1.5" opacity="0.85">
+        <!-- Connections with more visibility -->
+        <line x1="140" y1="180" x2="360" y2="130" stroke="#c9a84c" opacity="0.45"/>
+        <line x1="360" y1="130" x2="570" y2="250" stroke="#c9a84c" opacity="0.45"/>
+        <line x1="570" y1="250" x2="630" y2="280" stroke="#c9a84c" opacity="0.45"/>
+        <line x1="140" y1="180" x2="570" y2="250" stroke="#c9a84c" opacity="0.35"/>
+        <line x1="360" y1="130" x2="630" y2="280" stroke="#c9a84c" opacity="0.35"/>
+      </g>
+
+      <!-- Layer 3 Hubs (larger, enhanced visibility) -->
+      <g id="global-hubs">
+        <!-- Minneapolis -->
+        <circle cx="140" cy="180" r="14" fill="url(#heatPulse)" opacity="0.6"/>
+        <circle cx="140" cy="180" r="7" fill="#e2c06a" filter="url(#glow)"/>
+        <circle cx="140" cy="180" r="3.5" fill="#f7efd8"/>
+        
+        <!-- London -->
+        <circle cx="360" cy="130" r="14" fill="url(#heatPulse)" opacity="0.6"/>
+        <circle cx="360" cy="130" r="7" fill="#e2c06a" filter="url(#glow)"/>
+        <circle cx="360" cy="130" r="3.5" fill="#f7efd8"/>
+        
+        <!-- Bengaluru -->
+        <circle cx="570" cy="250" r="16" fill="url(#heatPulse)" opacity="0.7"/>
+        <circle cx="570" cy="250" r="8" fill="#e2c06a" filter="url(#glow)"/>
+        <circle cx="570" cy="250" r="4" fill="#f7efd8"/>
+        
+        <!-- Singapore -->
+        <circle cx="630" cy="280" r="14" fill="url(#heatPulse)" opacity="0.6"/>
+        <circle cx="630" cy="280" r="7" fill="#e2c06a" filter="url(#glow)"/>
+        <circle cx="630" cy="280" r="3.5" fill="#f7efd8"/>
+      </g>
+
+      <!-- Labels with legend — moved to bottom right to avoid text overlap -->
+      <text x="750" y="480" font-family="Cormorant Garamond, serif" font-size="14" fill="#c9a84c" opacity="0.85" text-anchor="end">Global Cyber Advisory</text>
+      <text x="750" y="500" font-family="DM Mono, monospace" font-size="10" fill="#c9a84c" opacity="0.6" text-anchor="end">Footprint across continents</text>
+      
+      <!-- Legend markers —bottom right -->
+      <circle cx="700" cy="520" r="4" fill="#e2c06a" filter="url(#glow)"/>
+      <text x="715" y="525" font-family="DM Mono, monospace" font-size="9" fill="#c9a84c" opacity="0.7">Organizations</text>
+      
+      <circle cx="700" cy="540" r="2.5" fill="#d4ae5a" filter="url(#glow)"/>
+      <text x="715" y="544" font-family="DM Mono, monospace" font-size="9" fill="#c9a84c" opacity="0.7">Individuals</text>
+    </svg>
+    
+    <!-- Text panel — repositioned to top-left with semi-transparent background -->
+    <div class="hero-right-text">
+      <div class="hero-text-label">Digital Risk Landscape</div>
+      <h3 class="hero-text-title">Cyber advisory<br>at every scale</h3>
+      <p class="hero-text-desc">From startups navigating regulatory entry, to global enterprises managing distributed risk, to individuals reclaiming compromised identities. One methodology. Three continents.</p>
+    </div>
+  </div>
+</section>
+
+<div class="trust-bar">
+  <span class="trust-label">Specializations</span>
+  <span class="trust-divider"></span><span class="trust-item">NIST CSF 2.0</span>
+  <span class="trust-divider"></span><span class="trust-item">FAIR Methodology</span>
+  <span class="trust-divider"></span><span class="trust-item">Agentic AI Risk</span>
+  <span class="trust-divider"></span><span class="trust-item">Zero Trust Architecture</span>
+  <span class="trust-divider"></span><span class="trust-item">Data Sovereignty</span>
+  <span class="trust-divider"></span><span class="trust-item">DevSecOps</span>
+  <span class="trust-divider"></span><span class="trust-item">Regulatory Alignment</span>
+</div>
+
+<section id="enterprise" class="section dark-section">
+  <div class="section-header fade-up">
+    <div class="eyebrow">01 — Enterprise Solutions</div>
+    <h2>Scalable Governance &amp;<br>Technical Guardrails</h2>
+  </div>
+  <div class="service-grid">
+    <div class="service-card fade-up" onclick="openServiceModal('irm')">
+      <h3>Integrated Risk Management</h3>
+      <p>Quantitative risk analysis using FAIR methodologies. Scalable from single-app reviews to enterprise-wide frameworks across complex regulatory environments.</p>
+      <div class="tags"><span class="tag">FAIR</span><span class="tag">Quantitative Risk</span><span class="tag">IRM</span></div>
+    </div>
+    <div class="service-card fade-up" onclick="openServiceModal('sar')">
+      <h3>Security Architecture Reviews &amp; Audit Assurance</h3>
+      <p>Technical security posture assessment, data security consulting, and independent audit guidance. Zero Trust architecture reviews and infrastructure hardening advisory.</p>
+      <div class="tags"><span class="tag">SAR</span><span class="tag">Data Security</span><span class="tag">Zero Trust</span></div>
+    </div>
+    <div class="service-card fade-up" onclick="openServiceModal('ai')">
+      <h3>Agentic AI Governance</h3>
+      <p>Risk frameworks for autonomous AI agents — covering prompt injection defense, automated privacy leakage detection, and LLM deployment guardrails.</p>
+      <div class="tags"><span class="tag">AI Security</span><span class="tag">LLM Ops</span><span class="tag">Prompt Defense</span></div>
+    </div>
+    <div class="service-card fade-up" onclick="openServiceModal('re')">
+      <h3>Regulatory Engineering</h3>
+      <p>Automated compliance checkpoints embedded in CI/CD pipelines. Shift from periodic manual audits to continuous, evidence-based monitoring at scale.</p>
+      <div class="tags"><span class="tag">SOC2-as-Code</span><span class="tag">DevSecOps</span><span class="tag">CI/CD</span></div>
+    </div>
+    <div class="service-card fade-up" onclick="openServiceModal('hchr')">
+      <h3>Hypercomputing &amp; Hardware Resourcing</h3>
+      <p>Data center infrastructure planning, hardware procurement guidance, and technical installation support. Capacity planning and resource allocation for compute-intensive workloads.</p>
+      <div class="tags"><span class="tag">Infrastructure</span><span class="tag">Hardware</span><span class="tag">Data Center</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="civil" class="section civil-section">
+  <div class="section-header fade-up">
+    <div class="eyebrow" style="color:var(--navy);">02 — Cicada Civil Defense</div>
+    <h2>Public Cyber Interest</h2>
+    <p style="margin-top:1rem; max-width:520px; font-size:0.78rem; opacity:0.58; line-height:1.9;">Expert knowledge shouldn't be locked behind a boardroom door. Specialized support for regular citizens and families facing digital crises.</p>
+  </div>
+  <div class="civil-grid">
+    <div class="civil-card fade-up" onclick="openServiceModal('dr')">
+      <div class="civil-card-num">01</div>
+      <h4>Data Recovery</h4>
+      <p>Technical advisory on recovering critical data from compromised cloud accounts or failed hardware devices. Clear guidance without the jargon.</p>
+    </div>
+    <div class="civil-card fade-up" onclick="openServiceModal('ir')">
+      <div class="civil-card-num">02</div>
+      <h4>Identity Restoration</h4>
+      <p>Step-by-step guidance for victims of identity theft to secure credentials, notify the right authorities, and clean up exposed digital footprints.</p>
+    </div>
+    <div class="civil-card fade-up" onclick="openServiceModal('cs')">
+      <div class="civil-card-num">03</div>
+      <h4>Cyber-Sikshak</h4>
+      <p>Free, simplified guides for families to protect children online and secure home IoT environments — in plain language, accessible to all.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE ARE -->
+<section id="who" class="section dark-section">
+  <div class="section-header fade-up">
+    <div class="eyebrow">03 — Who We Are</div>
+    <h2>A Collective Built<br>for Sensitive Work</h2>
+  </div>
+  <div class="who-grid">
+    <div class="fade-up">
+      <p style="font-size:0.8rem; opacity:0.65; line-height:1.95; margin-bottom:1.5rem;">
+        Cicada GRC Advisory operates as a structured collective of independent practitioners. Contributors have held senior and principal roles in risk, compliance, security architecture, and regulatory engineering at large financial institutions, technology firms, and regulated enterprises across North America, Southeast Asia, and South Asia.
+      </p>
+      <p style="font-size:0.8rem; opacity:0.65; line-height:1.95; margin-bottom:1.5rem;">
+        There is no permanent staff hierarchy. Engagements are staffed from a vetted network of domain specialists — assembled per project based on technical fit, geographic proximity, and regulatory jurisdiction. This model keeps overhead low and expertise relevant.
+      </p>
+      <p style="font-size:0.8rem; opacity:0.65; line-height:1.95;">
+        The collective is bound by a common operating framework: independent judgment, no vendor affiliation, and a standing obligation to client confidentiality that survives the conclusion of any engagement.
+      </p>
+      <div class="who-principle">
+        <h4>Operating Model</h4>
+        <p>Project-based staffing · Independent advisory · No retainer lock-in · Deliverables owned entirely by the client</p>
+      </div>
+      <div class="who-principle">
+        <h4>Domain Backgrounds</h4>
+        <p>Fortune 500 risk functions · Tier-1 financial services · Regulated technology environments · Public sector compliance programs</p>
+      </div>
+    </div>
+    <div class="fade-up">
+      <div class="who-anon-box">
+        <h4>On Anonymity — A Direct Explanation</h4>
+        <p>Contributors to Cicada GRC do not attach personal names to public-facing materials. This is not an evasion — it is a deliberate operating principle grounded in three practical realities.</p>
+        <p>First, the nature of engagements. Work in governance, risk, and compliance frequently involves unreleased findings, regulatory correspondence, and material non-public information. Public attribution creates conflict with existing NDAs and client confidentiality obligations.</p>
+        <p>Second, the structure of the collective. Individual contributors cycle across engagements. A named individual model implies continuity and personal brand that does not reflect how the work is actually structured or delivered.</p>
+        <p>Third, conflict avoidance. Named individuals in advisory roles attract institutional bias — prior employers, current affiliations, and industry relationships all create perceived or actual conflicts. Anonymity is a structural control against that.</p>
+        <p style="margin-bottom:0; border-top:1px solid rgba(255,255,255,0.08); padding-top:1rem; margin-top:0.5rem;">
+          Verified credentials and contributor backgrounds are disclosed under mutual NDA at the start of formal engagement. No client has been asked to take qualifications on faith.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENGAGEMENT MODEL -->
+<section id="engagement" class="section">
+  <div class="section-header fade-up">
+    <div class="eyebrow">04 — Engagement Model</div>
+    <h2>How We Work</h2>
+    <p style="margin-top:1rem; max-width:560px; font-size:0.78rem; opacity:0.58; line-height:1.9;">Every engagement follows a consistent operating framework. No ambiguity on scope, retention, or confidentiality.</p>
+  </div>
+  <div class="engagement-grid">
+    <div class="eng-card fade-up">
+      <h4>NDA First</h4>
+      <p>A mutual non-disclosure agreement is executed before any substantive discussion. Scope, credentials, and methodology are disclosed only within that protected context. Clients are not asked to share sensitive information without legal protection in place.</p>
+    </div>
+    <div class="eng-card fade-up">
+      <h4>Zero Retention</h4>
+      <p>Client data, findings, and documentation are not retained beyond the engagement period. Deliverables are transferred in full to the client. No proprietary data is used in any other context, including internal knowledge bases or future engagements with third parties.</p>
+    </div>
+    <div class="eng-card fade-up">
+      <h4>Independent Advisory</h4>
+      <p>Cicada GRC holds no vendor partnerships, reseller agreements, or referral arrangements with any technology provider. Recommendations are made on technical merit. There is no commercial incentive to steer clients toward any particular platform or product.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OPERATIONAL PRESENCE -->
+<section id="presence" class="section presence-section">
+  <div class="section-header fade-up">
+    <div class="eyebrow">05 — Operational Presence</div>
+    <h2>Where We Operate</h2>
+  </div>
+  <div class="presence-grid">
+    <div class="presence-card fade-up">
+      <div class="presence-city">Minneapolis</div>
+      <div class="presence-region">Minnesota, United States</div>
+      <p class="presence-note">Primary coordination hub for North American engagements. Covers US regulatory frameworks including SOC 2, HIPAA, NIST, and FFIEC.</p>
+    </div>
+    <div class="presence-card fade-up">
+      <div class="presence-city">Singapore</div>
+      <div class="presence-region">Republic of Singapore</div>
+      <p class="presence-note">Regional anchor for Southeast Asia and APAC mandates. Coverage includes MAS TRM, PDPA, and cross-border data governance matters.</p>
+    </div>
+    <div class="presence-card fade-up">
+      <div class="presence-city">Bengaluru</div>
+      <div class="presence-region">Karnataka, India</div>
+      <p class="presence-note">Engineering and GRC delivery hub. Covers DPDP Act compliance, RBI and SEBI regulatory alignment, and DevSecOps implementations.</p>
+    </div>
+  </div>
+  <p class="presence-address-note fade-up">
+    Registered operational addresses are shared exclusively during formal compliance or contractual onboarding. Disclosure follows execution of a mutual NDA. This policy applies uniformly across all three locations.
+  </p>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="grid-2">
+    <div class="contact-left fade-up">
+      <div class="eyebrow">06 — Inquiry</div>
+      <h2>Start a conversation.</h2>
+      <p style="margin-top:1rem; font-size:0.75rem; opacity:0.55; line-height:1.9; max-width:360px;">
+        Initial inquiries are transmitted via HTTPS through Web3Forms. No sensitive or proprietary information should be shared at this stage. A mutual NDA is established before any substantive discussion begins, after which communication moves to secure, agreed channels.
+      </p>
+      <p style="margin-top:0.8rem; font-size:0.72rem; opacity:0.42; line-height:1.8; max-width:360px;">
+        For organisations requiring higher assurance from first contact, reach out directly by email to initiate a ProtonMail or Signal-based channel.
+      </p>
+      <div class="contact-detail">
+        <a href="mailto:advisory@cicadagrc.com">advisory@cicadagrc.com</a>
+        <a href="#who">→ Who We Are</a>
+        <a href="#engagement">→ Engagement Model</a>
+      </div>
+      <div style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--mist); font-size:0.68rem; opacity:0.4; line-height:1.8;">
+        <strong style="opacity:0.7; font-weight:400;">Architecture note:</strong> This form uses Web3Forms over HTTPS POST. For production-grade intake, consider migrating to a serverless relay — AWS Lambda + SES, Cloudflare Workers + Resend, or SendGrid — which gives full audit logging, rate limiting, and eliminates third-party form dependencies. The current setup is appropriate for initial volume.
+      </div>
+    </div>
+    <div class="contact-form fade-up" id="contact-form-wrap">
+      <input type="hidden" name="access_key" value="b73a640e-81b6-4563-a37c-108aeb85f40c">
+      <input type="hidden" name="subject" value="New Inquiry — Cicada GRC Advisory">
+      <input type="hidden" name="from_name" value="Cicada GRC Website">
+      <input type="hidden" name="redirect" value="false">
+      <input type="checkbox" name="botcheck" style="display:none;">
+
+      <input type="text" name="name" placeholder="Full Name / Organization" autocomplete="name" required>
+      <input type="email" name="email" placeholder="Work Email" autocomplete="email" required>
+      <select name="inquiry_type" required>
+        <option value="">Select Inquiry Type</option>
+        <option>Enterprise GRC Advisory</option>
+        <option>AI Governance Framework</option>
+        <option>Civil Defense / Recovery Support</option>
+        <option>Expert Network Engagement</option>
+      </select>
+      <textarea name="message" placeholder="Briefly describe your challenge. Do not include sensitive or confidential information at this stage." rows="5" required></textarea>
+      <button class="btn-primary" id="submit-btn" onclick="handleSubmit(event)">Submit Inquiry →</button>
+
+      <div id="form-success" style="display:none; background:rgba(26,53,96,0.08); border:1px solid var(--navy-light); padding:1.2rem 1.4rem; font-size:0.75rem; color:var(--navy); line-height:1.8;">
+        ✓ &nbsp;Inquiry received. We will respond to <span id="confirm-email"></span> within 48 hours to confirm receipt and, if appropriate, initiate NDA execution.
+      </div>
+      <div id="form-error" style="display:none; background:rgba(163,48,48,0.07); border:1px solid #a33; padding:1.2rem 1.4rem; font-size:0.75rem; color:#7a2020; line-height:1.8;">
+        ✕ &nbsp;Submission failed. Email directly: <a href="mailto:advisory@cicadagrc.com" style="color:#7a2020;">advisory@cicadagrc.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE DETAIL MODALS -->
+
+<!-- IRM Modal -->
+<div class="service-modal-bg" id="modal-irm" onclick="closeServiceModal('irm', event)">
+  <div class="service-modal">
+    <div class="service-modal-header">
+      <h2 class="service-modal-title">Integrated Risk Management</h2>
+      <button class="service-modal-close" onclick="closeServiceModal('irm')">✕</button>
+    </div>
+    <div class="service-modal-body">
+      <p>Quantitative risk analysis grounded in the FAIR (Factor Analysis of Information Risk) methodology. Scalable engagements from single-application security posture assessment to enterprise-wide risk mapping across multiple business units.</p>
+      <h4>What We Do</h4>
+      <ul>
+        <li>Quantify risk in financial terms — probability × impact × asset value</li>
+        <li>Map compliance obligations to business risk — prioritize control investment by return</li>
+        <li>Stress-test risk models across scenarios (talent loss, supply-chain disruption, regulatory change)</li>
+        <li>Build risk registers that track to board-level reporting and budget cycles</li>
+      </ul>
+      <h4>Engagement Scope</h4>
+      <ul>
+        <li>Half-day risk workshops to multi-month frameworks</li>
+        <li>Results delivered as interactive risk models, not static PDFs</li>
+        <li>All tools and methodologies transfer to your team</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SAR Modal -->
+<div class="service-modal-bg" id="modal-sar" onclick="closeServiceModal('sar', event)">
+  <div class="service-modal">
+    <div class="service-modal-header">
+      <h2 class="service-modal-title">Security Architecture Reviews &amp; Audit Assurance</h2>
+      <button class="service-modal-close" onclick="closeServiceModal('sar')">✕</button>
+    </div>
+    <div class="service-modal-body">
+      <p>Technical assessment of your security architecture, data protection controls, and infrastructure hardening. Independent audit guidance aligned with Zero Trust principles and industry frameworks (NIST, SOC 2, ISO 27001).</p>
+      <h4>Services</h4>
+      <ul>
+        <li><strong>Security Architecture Review (SAR):</strong> End-to-end assessment of network segmentation, access control, encryption, and incident detection</li>
+        <li><strong>Data Security Consulting:</strong> Sensitive data inventory, classification, and protection strategy across cloud and on-premise environments</li>
+        <li><strong>Zero Trust Validation:</strong> Evaluate implementation of zero-trust principles — verify assume-breach posture, continuous verification, least-privilege access</li>
+        <li><strong>Audit Readiness:</strong> Pre-audit review of controls and evidence for SOC 2, HIPAA, PCI-DSS, and regulatory frameworks</li>
+      </ul>
+      <h4>Deliverables</h4>
+      <ul>
+        <li>Findings report with technical remediation guidance</li>
+        <li>Risk prioritization matrix (effort vs. impact)</li>
+        <li>Roadmap for control maturity</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- AI Modal -->
+<div class="service-modal-bg" id="modal-ai" onclick="closeServiceModal('ai', event)">
+  <div class="service-modal">
+    <div class="service-modal-header">
+      <h2 class="service-modal-title">Agentic AI Governance</h2>
+      <button class="service-modal-close" onclick="closeServiceModal('ai')">✕</button>
+    </div>
+    <div class="service-modal-body">
+      <p>Risk frameworks and governance guardrails for autonomous AI systems and large language model (LLM) deployments. Covers prompt injection, privacy leakage, data contamination, and operational safety.</p>
+      <h4>Coverage Areas</h4>
+      <ul>
+        <li>LLM prompt injection defense and jailbreak testing</li>
+        <li>Automated privacy leakage detection in model outputs</li>
+        <li>Data governance for training and fine-tuning pipelines</li>
+        <li>Model audit trails and explainability frameworks</li>
+        <li>Autonomous agent oversight and circuit-breaker policies</li>
+        <li>Vendor-provided AI service risk assessment (AWS Bedrock, Azure OpenAI, proprietary models)</li>
+      </ul>
+      <h4>Deliverables</h4>
+      <ul>
+        <li>AI risk assessment framework specific to your deployment</li>
+        <li>Control checklist and policy templates</li>
+        <li>Red-team findings and mitigation roadmap</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- RE Modal -->
+<div class="service-modal-bg" id="modal-re" onclick="closeServiceModal('re', event)">
+  <div class="service-modal">
+    <div class="service-modal-header">
+      <h2 class="service-modal-title">Regulatory Engineering</h2>
+      <button class="service-modal-close" onclick="closeServiceModal('re')">✕</button>
+    </div>
+    <div class="service-modal-body">
+      <p>Shift from periodic, manual audits to continuous compliance monitoring embedded in your development and operations workflows. Automate evidence collection, control testing, and audit readiness.</p>
+      <h4>Core Approach</h4>
+      <ul>
+        <li>Translate compliance requirements into executable, testable control statements</li>
+        <li>Build checks into CI/CD pipelines — fail deployments that violate compliance logic</li>
+        <li>Continuous evidence collection — audit logs, policy attestations, configuration scans automatically stored and timestamped</li>
+        <li>Dashboard visibility — see real-time compliance posture per team, per service, per regulation</li>
+      </ul>
+      <h4>Frameworks Covered</h4>
+      <ul>
+        <li>SOC 2 Type II (CC, A, L, P, S domains)</li>
+        <li>NIST Cybersecurity Framework and SP 800-53 mapped to controls</li>
+        <li>GDPR/CCPA data protection control verification</li>
+        <li>PCI-DSS and payment card industry requirements</li>
+        <li>FedRAMP and government contractor compliance</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- HCHR Modal -->
+<div class="service-modal-bg" id="modal-hchr" onclick="closeServiceModal('hchr', event)">
+  <div class="service-modal">
+    <div class="service-modal-header">
+      <h2 class="service-modal-title">Hypercomputing &amp; Hardware Resourcing</h2>
+      <button class="service-modal-close" onclick="closeServiceModal('hchr')">✕</button>
+    </div>
+    <div class="service-modal-body">
+      <p>Data center infrastructure planning, hardware procurement guidance, technical installation coordination, and capacity management for compute-intensive and AI workloads.</p>
+      <h4>Services Include</h4>
+      <ul>
+        <li>Workload assessment — compute, memory, storage, and network requirements for ML training, analytics, and inference pipelines</li>
+        <li>Hardware selection and procurement strategy — GPU clusters, specialized accelerators, CPUs, storage architecture recommendations</li>
+        <li>Data center site evaluation — facility readiness, cooling capacity, power infrastructure, physical security</li>
+        <li>Installation coordination and technical validation — on-site supervision of hardware deployment, firmware configuration, performance baseline testing</li>
+        <li>Network architecture for high-performance computing — low-latency interconnects, bandwidth optimization, inter-datacenter connectivity</li>
+        <li>Capacity planning and cost optimization — right-sizing infrastructure, identifying over-provisioned or under-utilized resources</li>
+      </ul>
+      <h4>Typical Engagements</h4>
+      <ul>
+        <li>GPU clusters for LLM training or fine-tuning</li>
+        <li>High-performance analytics infrastructure</li>
+        <li>Hybrid cloud-to-datacenter provisioning</li>
+        <li>Infrastructure refresh and upgrade planning</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Civil Defense: Data Recovery Modal -->
+<div class="service-modal-bg" id="modal-dr" onclick="closeServiceModal('dr', event)">
+  <div class="service-modal">
+    <div class="service-modal-header">
+      <h2 class="service-modal-title">Data Recovery</h2>
+      <button class="service-modal-close" onclick="closeServiceModal('dr')">✕</button>
+    </div>
+    <div class="service-modal-body">
+      <p>Practical guidance for recovering critical data after a security incident or hardware failure. We help you navigate data recovery services, validate recovered files, and prevent future loss.</p>
+      <h4>We Help With</h4>
+      <ul>
+        <li>Evaluating professional data recovery services — cost, timeline, data integrity guarantees</li>
+        <li>Incident documentation for law enforcement or insurance claims</li>
+        <li>File integrity validation after recovery — checksums, forensic verification</li>
+        <li>Backup strategy setup to prevent similar incidents</li>
+        <li>Chain of custody documentation for sensitive recovered data</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Civil Defense: Identity Restoration Modal -->
+<div class="service-modal-bg" id="modal-ir" onclick="closeServiceModal('ir', event)">
+  <div class="service-modal">
+    <div class="service-modal-header">
+      <h2 class="service-modal-title">Identity Restoration</h2>
+      <button class="service-modal-close" onclick="closeServiceModal('ir')">✕</button>
+    </div>
+    <div class="service-modal-body">
+      <p>Step-by-step support for victims of identity theft. We provide guidance on securing compromised accounts, notifying relevant authorities, and cleaning up your digital footprint.</p>
+      <h4>Process</h4>
+      <ul>
+        <li>Identify which accounts and data were compromised</li>
+        <li>Secure or reset all exposed credentials (email, banking, social media, etc.)</li>
+        <li>File reports with law enforcement (IC3) and consumer protection agencies (FTC in the US, local equivalents elsewhere)</li>
+        <li>Place fraud alerts with credit bureaus</li>
+        <li>Monitor credit reports and bank accounts for unauthorized activity</li>
+        <li>Remove exposed personal data from public databases and data broker sites where possible</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Civil Defense: Cyber-Sikshak Modal -->
+<div class="service-modal-bg" id="modal-cs" onclick="closeServiceModal('cs', event)">
+  <div class="service-modal">
+    <div class="service-modal-header">
+      <h2 class="service-modal-title">Cyber-Sikshak (Digital Literacy)</h2>
+      <button class="service-modal-close" onclick="closeServiceModal('cs')">✕</button>
+    </div>
+    <div class="service-modal-body">
+      <p>Free, simplified guides for families to protect children online and secure home IoT environments. Written in plain language, avoiding jargon and overcomplicated technical steps.</p>
+      <h4>Topics Covered</h4>
+      <ul>
+        <li>How to spot phishing messages and scams</li>
+        <li>Strong password and passphrase basics</li>
+        <li>What two-factor authentication is and why it matters</li>
+        <li>Protecting children online — account privacy, safe browsing, recognizing predatory behavior</li>
+        <li>Home Wi-Fi and smart device security — changing default passwords, device isolation, firmware updates</li>
+        <li>What to do if your child encounters harmful content or contact</li>
+        <li>Backing up important photos and documents</li>
+      </ul>
+      <h4>Format</h4>
+      <ul>
+        <li>Illustrated step-by-step guides</li>
+        <li>Video walkthroughs (coming soon)</li>
+        <li>Checklists families can print and complete at their own pace</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">
+    <div class="brand-name">Cicada GRC Advisory</div>
+    <p>Independent governance, risk, and compliance advisory. No vendor affiliations. No retainer lock-in. Findings are ours; all deliverables transfer to the client.</p>
+    <p style="margin-top:1rem; opacity:0.28; font-size:0.65rem; line-height:1.7;">Cicada GRC Advisory is an independent collective. It is not affiliated with, endorsed by, or in any commercial relationship with any technology vendor, standards body, or regulatory authority referenced on this site.</p>
+  </div>
+  <div class="footer-col">
+    <h5>Enterprise Services</h5>
+    <a href="#enterprise">Integrated Risk Management</a>
+    <a href="#enterprise">Architectural Guardrails</a>
+    <a href="#enterprise">Agentic AI Governance</a>
+    <a href="#enterprise">Regulatory Engineering</a>
+  </div>
+  <div class="footer-col">
+    <h5>Civil Defense</h5>
+    <a href="#civil">Data Recovery</a>
+    <a href="#civil">Identity Restoration</a>
+    <a href="#civil">Cyber-Sikshak</a>
+  </div>
+  <div class="footer-col">
+    <h5>Organisation</h5>
+    <a href="#who">Who We Are</a>
+    <a href="#engagement">Engagement Model</a>
+    <a href="#presence">Operational Presence</a>
+    <a href="mailto:advisory@cicadagrc.com">advisory@cicadagrc.com</a>
+  </div>
+</footer>
+<div class="footer-bottom">© 2026 Cicada GRC Advisory. Independent advisory. No vendor affiliation. All deliverables owned by the client.</div>
+
+<script>
+  const nav = document.getElementById('top-nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  document.querySelectorAll('.service-card, .civil-card').forEach((el, i) => { el.style.transitionDelay = (i % 2) * 0.1 + 's'; });
+
+  // Mobile menu
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const btn = document.getElementById('hamburger');
+    menu.classList.toggle('open');
+    btn.classList.toggle('open');
+    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+  }
+  function closeMobileMenu() {
+    document.getElementById('mobile-menu').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Cicada modal
+  function openModal() { document.getElementById('cicada-bg').classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeModal() { document.getElementById('cicada-bg').classList.remove('open'); document.body.style.overflow = ''; }
+  function bgClose(e) { if (e.target === document.getElementById('cicada-bg')) closeModal(); }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeMobileMenu(); } });
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    const wrap = document.getElementById('contact-form-wrap');
+    const successEl = document.getElementById('form-success');
+    const errorEl = document.getElementById('form-error');
+
+    const fields = wrap.querySelectorAll('input[required], select[required], textarea[required]');
+    let valid = true;
+    fields.forEach(el => {
+      if (!el.value.trim()) { el.style.borderColor = '#a33'; valid = false; }
+      else { el.style.borderColor = ''; }
+    });
+    if (!valid) return;
+
+    // Capture email before hiding fields
+    const emailVal = wrap.querySelector('input[name="email"]').value;
+
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+
+    const data = {};
+    wrap.querySelectorAll('input[name], select[name], textarea[name]').forEach(el => {
+      if (el.type !== 'checkbox') data[el.name] = el.value;
+    });
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const json = await res.json();
+      if (json.success) {
+        fields.forEach(el => el.style.display = 'none');
+        btn.style.display = 'none';
+        document.getElementById('confirm-email').textContent = emailVal;
+        successEl.style.display = 'block';
+        errorEl.style.display = 'none';
+      } else {
+        throw new Error(json.message || 'Submission failed');
+      }
+    } catch (err) {
+      btn.textContent = 'Submit Inquiry →';
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      errorEl.style.display = 'block';
+      successEl.style.display = 'none';
+    }
+  }
+
+  // Service modal functions
+  const serviceModals = ['irm', 'sar', 'ai', 're', 'hchr', 'dr', 'ir', 'cs'];
+  
+  function openServiceModal(serviceId) {
+    const modal = document.getElementById(`modal-${serviceId}`);
+    if (modal) {
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeServiceModal(serviceId, event) {
+    // Allow closing only when clicking the close button or background
+    if (event && event.target.closest('.service-modal')) return;
+    const modal = document.getElementById(`modal-${serviceId}`);
+    if (modal) {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+
+  // Close modals on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      serviceModals.forEach(id => {
+        const modal = document.getElementById(`modal-${id}`);
+        if (modal && modal.classList.contains('open')) {
+          modal.classList.remove('open');
+        }
+      });
+      document.body.style.overflow = '';
+      closeModal();
+      closeMobileMenu();
+    }
+  });
+</script>
+</body>
+</html>
